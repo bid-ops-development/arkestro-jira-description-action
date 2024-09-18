@@ -7,8 +7,11 @@ function extractTextFromADF(adfNode: any): string {
   let text = '';
 
   function traverseNode(node: any) {
+    console.log('Traversing node: ', JSON.stringify(node, null, 2)); // Debug: print the current node
+
     if (node.type === 'text' && node.text) {
       text += node.text;
+      console.log('Text found: ', node.text); // Debug: print the found text
     } else if (node.content && Array.isArray(node.content)) {
       node.content.forEach(traverseNode);
     }
@@ -16,9 +19,9 @@ function extractTextFromADF(adfNode: any): string {
 
   traverseNode(adfNode);
 
+  console.log('Final extracted text: ', text); // Debug: print the final extracted text
   return text;
 }
-
 export class JiraConnector {
   client: AxiosInstance;
   JIRA_BASE_URL: string;
