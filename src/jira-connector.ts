@@ -1,55 +1,40 @@
 import axios, { AxiosInstance } from 'axios';
 import { getInputs } from './action-inputs';
 import { JIRA, JIRADetails } from './types';
-import { ADFEntity, traverse } from '@atlaskit/adf-utils';
 
+// Function to extract text from a generic JSON structure representing an ADF node
 function extractTextFromADF(adfNode: any): string {
   let text = '';
 
-  if (!adfNode) return text;
-
-  switch (adfNode.type) {
-    case 'paragraph':
-      if (adfNode.content && Array.isArray(adfNode.content)) {
-        adfNode.content.forEach((childNode: any) => {
-          text += extractTextFromADF(childNode);
-        });
-        text += '\n';
-      }
-      break;
-    case 'text':
-      text += adfNode.text || '';
-      break;
-    // Handle other node types if necessary
-    default:
-      if (adfNode.content && Array.isArray(adfNode.content)) {
-        adfNode.content.forEach((childNode: any) => {
-          text += extractTextFromADF(childNode);
-        });
-      }
-      break;
+  function traverseNode(node: any) {
+    if (node.type === 'text' && node.text) {
+      text += node.text;
+    } else if (node.content && Array.isArray(node.content)) {
+      node.content.forEach(traverseNode);
+    }
   }
+
+  traverseNode(adfNode);
 
   return text;
 }
 
 export class JiraConnector {
   client: AxiosInstance;
-  JIRA_TOKEN: string;
   JIRA_BASE_URL: string;
 
   constructor() {
     const { JIRA_TOKEN, JIRA_BASE_URL } = getInputs();
 
     this.JIRA_BASE_URL = JIRA_BASE_URL;
-    this.JIRA_TOKEN = JIRA_TOKEN;
 
-    const encodedToken = Buffer.from(JIRA_TOKEN).toString('base64');
+    const credentials = `${JIRA_TOKEN}`;
+    const encodedCredentials = Buffer.from(credentials).toString('base64');
 
     this.client = axios.create({
       baseURL: `${JIRA_BASE_URL}/rest/api/3`,
-      timeout: 2000,
-      headers: { Authorization: `Basic ${encodedToken}` },
+      timeout: 10000,
+      headers: { Authorization: `Basic ${encodedCredentials}` },
     });
   }
 
@@ -62,7 +47,13 @@ export class JiraConnector {
         fields: { issuetype: type, project, summary, description },
       } = issue;
 
-      const plainTextDescription = extractTextFromADF(description);
+      let plainTextDescription = '';
+
+      if (description && typeof description === 'object') {
+        plainTextDescription = extractTextFromADF(description);
+      } else if (typeof description === 'string') {
+        plainTextDescription = description;
+      }
 
       return {
         key,
@@ -83,9 +74,11 @@ export class JiraConnector {
       console.log(
         'Error fetching details from JIRA. Please check if token you provide is built correctly & API key has all needed permissions. https://github.com/cakeinpanic/jira-description-action#jira-token'
       );
+
       if (error.response) {
         throw new Error(JSON.stringify(error.response.data, null, 4));
       }
+
       throw error;
     }
   }
