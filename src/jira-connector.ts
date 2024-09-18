@@ -22,6 +22,7 @@ function extractTextFromADF(adfNode: any): string {
   console.log('Final extracted text: ', text); // Debug: print the final extracted text
   return text;
 }
+
 export class JiraConnector {
   client: AxiosInstance;
   JIRA_BASE_URL: string;
