@@ -87,6 +87,10 @@
       "type": "runtime"
     },
     {
+      "name": "@octokit/plugin-rest-endpoint-methods",
+      "type": "runtime"
+    },
+    {
       "name": "axios",
       "type": "runtime"
     }
