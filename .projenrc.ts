@@ -14,3 +14,24 @@ const project = new GitHubActionTypeScriptProject({
   // packageName: undefined,  /* The "name" in package.json. */
 });
 project.synth();
+
+// const project = new GitHubActionTypeScriptProject({
+//   name: 'my-project',
+//   defaultReleaseBranch: 'main',
+//   actionMetadata: {
+//     runs: {
+//       using: RunsUsing.NODE_12,
+//       main: 'dist/index.js',
+//     },
+//     inputs: {
+//       myInput: {
+//         description: 'my first input',
+//       },
+//     },
+//     outputs: {
+//       myOutput: {
+//         description: 'my first output',
+//       },
+//     },
+//   },
+// });
