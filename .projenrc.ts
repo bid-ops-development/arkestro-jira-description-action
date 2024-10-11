@@ -4,11 +4,11 @@ const project = new GitHubActionTypeScriptProject({
   devDeps: ['projen-github-action-typescript'],
   name: 'arkestro-jira-description-action',
   projenrcTs: true,
-
   deps: [
     '@atlaskit/adf-utils',
     'axios',
     '@octokit/plugin-rest-endpoint-methods',
+    'adf-to-md',
   ], /* Runtime dependencies of this module. */
   // description: undefined,  /* The description is just a string that helps people understand the purpose of the package. */
   // packageName: undefined,  /* The "name" in package.json. */

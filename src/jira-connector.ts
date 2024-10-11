@@ -1,64 +1,9 @@
-import { traverse } from '@atlaskit/adf-utils/traverse';
+import Converter from 'adf-to-md';
 import axios, { AxiosInstance } from 'axios';
 import { getInputs } from './action-inputs';
 import { JIRA, JIRADetails } from './types';
+// @ts-ignore
 
-function extractTextFromADF(adfNode: any): string {
-  let text = '';
-
-  // Define a visitor with handlers for different node types.
-  const visitor = {
-    text: (node: any) => {
-      text += node.text + ' ';
-    },
-    paragraph: () => {
-      text += '\n';
-    },
-    bulletList: () => {
-      text += '\n'; // Add a newline before a bullet list for readability.
-    },
-    orderedList: () => {
-      text += '\n'; // Add a newline before an ordered list for readability.
-    },
-    listItem: () => {
-      text += '* '; // Prefix list items with '* ' for simplicity.
-    },
-    heading: (node: any) => {
-      text += '\n' + '#'.repeat(node.attrs.level) + ' '; // Use '#' to represent heading levels.
-    },
-    // Add additional handlers for other node types as necessary here.
-    // You may want to handle `hardBreak`, `blockquote`, `codeBlock`, etc.
-  };
-
-  traverse(adfNode, visitor);
-
-  return text; //text.trim(); // Trim the final string to remove any extra whitespace.
-}
-
-// function extractTextFromADF(adfNode: any): string {
-//   let text = '';
-
-//   function traverseNode(node: any) {
-//     console.log('Traversing node: ', JSON.stringify(node, null, 2));
-
-//     if (node.type === 'text' && node.text) {
-//       text += "\n" + node.text;
-//       console.log('Text found: ', node.text);
-//     } else if (node.type === 'paragraph' && node.content && Array.isArray(node.content)) {
-//       node.content.forEach(traverseNode);
-//       text += '\n';
-//     } else if (node.type === 'hardBreak') {
-//       text += '\n';
-//     } else if (node.content && Array.isArray(node.content)) {
-//       node.content.forEach(traverseNode);
-//     }
-//   }
-
-//   traverseNode(adfNode);
-
-//   console.log('Final extracted text: ', text);
-//   return text;
-// }
 export class JiraConnector {
   client: AxiosInstance;
   JIRA_BASE_URL: string;
@@ -90,7 +35,7 @@ export class JiraConnector {
       let plainTextDescription = '';
 
       if (description && typeof description === 'object') {
-        plainTextDescription = extractTextFromADF(description);
+        plainTextDescription = Converter(description);
       } else if (typeof description === 'string') {
         plainTextDescription = description;
       }
