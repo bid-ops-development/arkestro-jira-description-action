@@ -41,7 +41,8 @@
   },
   "dependencies": {
     "@actions/core": "^1.11.1",
-    "@actions/github": "^6.0.0"
+    "@actions/github": "^6.0.0",
+    "@atlaskit/adf-utils": "^19.8.1"
   },
   "main": "lib/index.js",
   "license": "Apache-2.0",
