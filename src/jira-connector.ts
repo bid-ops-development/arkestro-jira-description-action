@@ -1,31 +1,64 @@
 import axios, { AxiosInstance } from 'axios';
 import { getInputs } from './action-inputs';
 import { JIRA, JIRADetails } from './types';
+import { traverse } from '@atlaskit/adf-utils';
 
 function extractTextFromADF(adfNode: any): string {
   let text = '';
 
-  function traverseNode(node: any) {
-    console.log('Traversing node: ', JSON.stringify(node, null, 2));
-
-    if (node.type === 'text' && node.text) {
-      text += node.text;
-      console.log('Text found: ', node.text);
-    } else if (node.type === 'paragraph' && node.content && Array.isArray(node.content)) {
-      node.content.forEach(traverseNode);
+  // Define a visitor with handlers for different node types.
+  const visitor = {
+    text: (node: any) => {
+      text += node.text + ' ';
+    },
+    paragraph: () => {
       text += '\n';
-    } else if (node.type === 'hardBreak') {
-      text += '\n';
-    } else if (node.content && Array.isArray(node.content)) {
-      node.content.forEach(traverseNode);
-    }
-  }
+    },
+    bulletList: () => {
+      text += '\n'; // Add a newline before a bullet list for readability.
+    },
+    orderedList: () => {
+      text += '\n'; // Add a newline before an ordered list for readability.
+    },
+    listItem: () => {
+      text += '* '; // Prefix list items with '* ' for simplicity.
+    },
+    heading: (node: any) => {
+      text += '\n' + '#'.repeat(node.attrs.level) + ' '; // Use '#' to represent heading levels.
+    },
+    // Add additional handlers for other node types as necessary here.
+    // You may want to handle `hardBreak`, `blockquote`, `codeBlock`, etc.
+  };
 
-  traverseNode(adfNode);
+  traverse(adfNode, visitor);
 
-  console.log('Final extracted text: ', text);
-  return text;
+  return text; //text.trim(); // Trim the final string to remove any extra whitespace.
 }
+
+// function extractTextFromADF(adfNode: any): string {
+//   let text = '';
+
+//   function traverseNode(node: any) {
+//     console.log('Traversing node: ', JSON.stringify(node, null, 2));
+
+//     if (node.type === 'text' && node.text) {
+//       text += "\n" + node.text;
+//       console.log('Text found: ', node.text);
+//     } else if (node.type === 'paragraph' && node.content && Array.isArray(node.content)) {
+//       node.content.forEach(traverseNode);
+//       text += '\n';
+//     } else if (node.type === 'hardBreak') {
+//       text += '\n';
+//     } else if (node.content && Array.isArray(node.content)) {
+//       node.content.forEach(traverseNode);
+//     }
+//   }
+
+//   traverseNode(adfNode);
+
+//   console.log('Final extracted text: ', text);
+//   return text;
+// }
 export class JiraConnector {
   client: AxiosInstance;
   JIRA_BASE_URL: string;
