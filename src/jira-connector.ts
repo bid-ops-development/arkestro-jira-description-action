@@ -35,7 +35,7 @@ export class JiraConnector {
       let plainTextDescription = '';
 
       if (description && typeof description === 'object') {
-        plainTextDescription = convert(description);
+        plainTextDescription = convert(description).result;
       } else if (typeof description === 'string') {
         plainTextDescription = description;
       }
