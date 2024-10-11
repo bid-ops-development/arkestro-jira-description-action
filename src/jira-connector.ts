@@ -1,8 +1,8 @@
-import Converter from 'adf-to-md';
+// @ts-ignore
+import { convert } from 'adf-to-md';
 import axios, { AxiosInstance } from 'axios';
 import { getInputs } from './action-inputs';
 import { JIRA, JIRADetails } from './types';
-// @ts-ignore
 
 export class JiraConnector {
   client: AxiosInstance;
@@ -35,7 +35,7 @@ export class JiraConnector {
       let plainTextDescription = '';
 
       if (description && typeof description === 'object') {
-        plainTextDescription = Converter(description);
+        plainTextDescription = convert(description);
       } else if (typeof description === 'string') {
         plainTextDescription = description;
       }
