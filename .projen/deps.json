@@ -87,6 +87,10 @@
       "type": "runtime"
     },
     {
+      "name": "@octokit/core",
+      "type": "runtime"
+    },
+    {
       "name": "@octokit/plugin-rest-endpoint-methods",
       "type": "runtime"
     },

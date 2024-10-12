@@ -109,7 +109,7 @@
       "description": "Runs eslint against the codebase",
       "steps": [
         {
-          "exec": "eslint --ext .ts,.tsx --fix --no-error-on-unmatched-pattern $@ src test build-tools projenrc .projenrc.ts",
+          "exec": "eslint --ext .ts,.tsx,.yml --fix --no-error-on-unmatched-pattern $@ src test build-tools projenrc .projenrc.ts",
           "receiveArgs": true
         }
       ]
@@ -119,7 +119,7 @@
       "description": "Install project dependencies and update lockfile (non-frozen)",
       "steps": [
         {
-          "exec": "yarn install --check-files"
+          "exec": "yarn install"
         }
       ]
     },
@@ -128,7 +128,7 @@
       "description": "Install project dependencies using frozen lockfile",
       "steps": [
         {
-          "exec": "yarn install --check-files --frozen-lockfile"
+          "exec": "yarn install --immutable"
         }
       ]
     },
@@ -224,13 +224,13 @@
       },
       "steps": [
         {
-          "exec": "npx npm-check-updates@16 --upgrade --target=minor --peer --dep=dev,peer,prod,optional --filter=@types/jest,@types/node,@vercel/ncc,eslint-import-resolver-typescript,eslint-plugin-import,jest,projen,projen-github-action-typescript,ts-jest,ts-node,typescript,@actions/core,@actions/github,@atlaskit/adf-utils,@octokit/plugin-rest-endpoint-methods,adf-to-md,axios"
+          "exec": "yarn dlx npm-check-updates@16 --upgrade --target=minor --peer --dep=dev,peer,prod,optional --filter=@types/jest,@types/node,@vercel/ncc,eslint-import-resolver-typescript,eslint-plugin-import,jest,projen,projen-github-action-typescript,ts-jest,ts-node,typescript,@actions/core,@actions/github,@atlaskit/adf-utils,@octokit/core,@octokit/plugin-rest-endpoint-methods,adf-to-md,axios"
         },
         {
-          "exec": "yarn install --check-files"
+          "exec": "yarn install"
         },
         {
-          "exec": "yarn upgrade @types/jest @types/node @typescript-eslint/eslint-plugin @typescript-eslint/parser @vercel/ncc commit-and-tag-version constructs eslint-import-resolver-typescript eslint-plugin-import eslint jest jest-junit projen projen-github-action-typescript ts-jest ts-node typescript @actions/core @actions/github @atlaskit/adf-utils @octokit/plugin-rest-endpoint-methods adf-to-md axios"
+          "exec": "yarn up @types/jest @types/node @typescript-eslint/eslint-plugin @typescript-eslint/parser @vercel/ncc commit-and-tag-version constructs eslint-import-resolver-typescript eslint-plugin-import eslint jest jest-junit projen projen-github-action-typescript ts-jest ts-node typescript @actions/core @actions/github @atlaskit/adf-utils @octokit/core @octokit/plugin-rest-endpoint-methods adf-to-md axios"
         },
         {
           "exec": "npx projen"
