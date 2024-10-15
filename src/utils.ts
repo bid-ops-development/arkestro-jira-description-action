@@ -75,8 +75,8 @@ export const buildPRDescription = (details: JIRADetails) => {
   const displayKey = details.key.toUpperCase();
   const listAsString = details.labels.join(' ');
   return `<table><tbody><tr><td><a href="${details.url}" title="${displayKey}" target="_blank"><img alt="${details.type.name}" src="${details.type.icon}" /> ${displayKey}</a>
-  ${details.summary}</td><td>${details.type.name}</td></tr></tbody></table><br />
-  **Labels:** ${listAsString}
+  ${details.summary}</td><td><b>Ticket Type: </b>${details.type.name}</td></tr></tbody></table><br />
+  <b>Labels:</b> ${listAsString}
 
   ${details.description}`;
 };
