@@ -29,7 +29,7 @@ export class JiraConnector {
     try {
       const issue: JIRA.Issue = await this.getIssue(key);
       const {
-        fields: { issuetype: type, project, summary, description },
+        fields: { issuetype: type, project, summary, description, labels },
       } = issue;
 
       let plainTextDescription = '';
@@ -54,6 +54,7 @@ export class JiraConnector {
           key: project.key,
         },
         description: plainTextDescription,
+        labels,
       };
     } catch (error: any) {
       console.log(

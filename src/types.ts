@@ -90,6 +90,7 @@ export interface JIRADetails {
     url: string;
     key: string;
   };
+  labels: string[];
 }
 
 export interface IActionInputs {
