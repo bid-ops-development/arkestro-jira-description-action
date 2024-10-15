@@ -74,7 +74,7 @@ ${HIDDEN_MARKER_END}
 export const buildPRDescription = (details: JIRADetails) => {
   const displayKey = details.key.toUpperCase();
   const listAsString = details.labels.join(' ');
-  return `<table><tbody><th>Ticket Type: </b>${details.type.name} <th style="font face='Courier New', monospace; background-color: 0d8dba;"><b>Labels:</b></font> ${listAsString}</th></th><tr><td><a href="${details.url}" title="${displayKey}" target="_blank"><img alt="${details.type.name}" src="${details.type.icon}" /> ${displayKey}</a>
+  return `<table><tbody><th>Ticket Type: </b>${details.type.name} <th style="font-family:'Courier New', monospace; background-color: 0d8dba;"><b>Labels:</b></font> ${listAsString}</th></th><tr><td><a href="${details.url}" title="${displayKey}" target="_blank"><img alt="${details.type.name}" src="${details.type.icon}" /> ${displayKey}</a>
   ${details.summary}</td></tr></tbody></table><br />
 
   ${details.description}`;
