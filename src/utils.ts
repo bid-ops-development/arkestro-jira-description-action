@@ -71,7 +71,7 @@ ${HIDDEN_MARKER_END}
   return jiraDetailsMessage + oldBody
 }
 
-function buildPRDescription(details: JIRADetails): string {
+export function buildPRDescription(details: JIRADetails): string {
   const labelString = details.labels.join(', ') // Join labels with a comma and space
 
   return `<table>
