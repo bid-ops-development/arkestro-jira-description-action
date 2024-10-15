@@ -74,17 +74,40 @@ ${HIDDEN_MARKER_END}
 export const buildPRDescription = (details: JIRADetails) => {
   const displayKey = details.key.toUpperCase();
   const listAsString = details.labels.join(' ');
+  let emoji = '';
+
+  switch (details.type.name) {
+    case 'Epic':
+      emoji = ':hurtrealbad:';
+      break;
+    case 'Story':
+      emoji = ':suspect:';
+      break;
+    case 'Task':
+      emoji = ':godmode:';
+      break;
+    case 'Bug':
+      emoji = ':rage1:';
+      break;
+    default:
+      emoji = ':shipit:';
+  }
+
   return `<table>
-    <thead style="font-family:'Courier New', monospace; font-weight: bold; background-color: 0d8dba;">
+    <thead>
       <tr>
-        <th>Ticket Description</th>
+        <th>${emoji} Ticket Description ${emoji}</th>
         <th>Ticket Type</th> 
         <th>Labels</th>
       </tr>
     </thead>
     <tbody>      
       <tr>
-        <td><a href="${details.url}" title="${displayKey}" target="_blank"><img alt="${details.type.name}" src="${details.type.icon}" /> ${displayKey}</a> ${details.summary}</td>
+        <td>
+          <a href="${details.url}" title="${displayKey}" target="_blank">
+            <img alt="${details.type.name}" src="${details.type.icon}" /> ${displayKey}
+          </a> ${details.summary}
+        </td>
         <td>${details.type.name}</td>
         <td>${listAsString}</td>
       </tr>
