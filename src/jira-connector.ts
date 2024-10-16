@@ -57,7 +57,7 @@ export class JiraConnector {
         },
         description: plainTextDescription,
         labels,
-        priority: priority.name
+        priority: priority.name,
       }
     }
     catch (error: any) {

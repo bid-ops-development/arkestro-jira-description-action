@@ -34858,7 +34858,7 @@ function buildPRDescription(details) {
         <td><a href="${details.url}" title="${details.key}" target="_blank"><img alt="${details.type.icon}" src="${details.type.icon}" /> ${details.key}</a> ${details.summary}</td>
         <td>${details.type.name}</td>
         <td>${labelString}</td>
-        <td>TBD</td>
+        <td>${details.priority || "Not Set"}</td>
       </tr>
     </tbody>
   </table><br />
@@ -38295,7 +38295,7 @@ var JiraConnector = class {
     try {
       const issue = await this.getIssue(key);
       const {
-        fields: { issuetype: type, project, summary, description, labels }
+        fields: { issuetype: type, project, summary, description, labels, priority }
       } = issue;
       let plainTextDescription = "";
       if (description && typeof description === "object") {
@@ -38317,7 +38317,8 @@ var JiraConnector = class {
           key: project.key
         },
         description: plainTextDescription,
-        labels
+        labels,
+        priority: priority.name
       };
     } catch (error2) {
       console.log(
@@ -38330,7 +38331,7 @@ var JiraConnector = class {
     }
   }
   async getIssue(id) {
-    const url2 = `/issue/${id}?fields=project,summary,issuetype,description,labels`;
+    const url2 = `/issue/${id}?fields=project,summary,issuetype,description,labels,priority`;
     const response = await this.client.get(url2);
     return response.data;
   }
