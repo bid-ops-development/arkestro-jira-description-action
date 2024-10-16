@@ -34845,7 +34845,7 @@ ${HIDDEN_MARKER_END}
 function buildPRDescription(details) {
   const labelString = details.labels.join(", ");
   return `<table>
-    <thead style="font-family:'Courier New', monospace; font-weight: bold; background-color: 0d8dba;">
+    <thead>
       <tr>
         <th>Ticket Description</th>
         <th>Ticket Type</th>
@@ -34858,7 +34858,7 @@ function buildPRDescription(details) {
         <td><a href="${details.url}" title="${details.key}" target="_blank"><img alt="${details.type.icon}" src="${details.type.icon}" /> ${details.key}</a> ${details.summary}</td>
         <td>${details.type.name}</td>
         <td>${labelString}</td>
-        <td>${details.priority.name}</td>
+        <td>TBD</td>
       </tr>
     </tbody>
   </table><br />
@@ -38295,7 +38295,7 @@ var JiraConnector = class {
     try {
       const issue = await this.getIssue(key);
       const {
-        fields: { issuetype: type, project, summary, description, labels, priority }
+        fields: { issuetype: type, project, summary, description, labels }
       } = issue;
       let plainTextDescription = "";
       if (description && typeof description === "object") {
@@ -38317,8 +38317,7 @@ var JiraConnector = class {
           key: project.key
         },
         description: plainTextDescription,
-        labels,
-        priority
+        labels
       };
     } catch (error2) {
       console.log(

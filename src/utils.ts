@@ -75,7 +75,7 @@ export function buildPRDescription(details: JIRADetails): string {
   const labelString = details.labels.join(', ') // Join labels with a comma and space
 
   return `<table>
-    <thead style="font-family:'Courier New', monospace; font-weight: bold; background-color: 0d8dba;">
+    <thead>
       <tr>
         <th>Ticket Description</th>
         <th>Ticket Type</th>
@@ -88,7 +88,7 @@ export function buildPRDescription(details: JIRADetails): string {
         <td><a href="${details.url}" title="${details.key}" target="_blank"><img alt="${details.type.icon}" src="${details.type.icon}" /> ${details.key}</a> ${details.summary}</td>
         <td>${details.type.name}</td>
         <td>${labelString}</td>
-        <td>${details.priority.name}</td>
+        <td>TBD</td>
       </tr>
     </tbody>
   </table><br />
