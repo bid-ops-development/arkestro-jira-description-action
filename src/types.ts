@@ -37,12 +37,12 @@ export interface IssueStatus {
   }
 }
 
-// export interface IssuePriority {
-//   self: string
-//   iconUrl: string
-//   name: string
-//   id: string
-// }
+export interface IssuePriority {
+  self: string
+  iconUrl: string
+  name: string
+  id: string
+}
 
 export interface IssueType {
   self: string
@@ -67,7 +67,7 @@ export interface Issue {
   fields: {
     summary: string
     status: IssueStatus
-    // priority: IssuePriority
+    priority: IssuePriority
     issuetype: IssueType
     project: IssueProject
     labels: string[]
@@ -90,7 +90,7 @@ export interface JIRADetails {
     key: string
   }
   labels: string[]
-  // priority: IssuePriority
+  priority: string
 }
 
 export interface IActionInputs {

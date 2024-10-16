@@ -30,7 +30,7 @@ export class JiraConnector {
     try {
       const issue: Issue = await this.getIssue(key) // Use Issue directly
       const {
-        fields: { issuetype: type, project, summary, description, labels },
+        fields: { issuetype: type, project, summary, description, labels, priority },
       } = issue
 
       let plainTextDescription = ''
@@ -57,6 +57,7 @@ export class JiraConnector {
         },
         description: plainTextDescription,
         labels,
+        priority: priority.name
       }
     }
     catch (error: any) {
@@ -73,7 +74,7 @@ export class JiraConnector {
   }
 
   async getIssue(id: string): Promise<Issue> { // Use Issue directly
-    const url = `/issue/${id}?fields=project,summary,issuetype,description,labels`
+    const url = `/issue/${id}?fields=project,summary,issuetype,description,labels,priority`
     const response = await this.client.get<Issue>(url) // Use Issue directly
     return response.data
   }
