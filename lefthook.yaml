@@ -5,3 +5,4 @@ pre-commit:
       stage_fixed: true
     has_changes:
       run: git diff --exit-code dist/index.js
+      fail_text: changes found after running yarn build:bundle make sure to commit these
