@@ -34847,7 +34847,7 @@ function buildPRDescription(details) {
   let emoji = "";
   switch (details.type.name) {
     case "Epic":
-      emoji = ":breakit:";
+      emoji = ":hurtrealbad:";
       break;
     case "Story":
       emoji = ":suspect:";
