@@ -1,0 +1,17 @@
+{
+  "recommendations": [
+    "dbaeumer.vscode-eslint", // ESLint integration
+    "foxundermoon.shell-format", // Shell script formatting
+    "esbenp.prettier-vscode", // Prettier for code formatting (optional, if you want to use Prettier)
+    "ms-vscode.vscode-typescript-tslint-plugin", // TSLint (if needed)
+    "ms-vscode.vscode-typescript-tslint-plugin", // TypeScript support
+    "ms-azuretools.vscode-docker", // Docker support (optional, if your project uses Docker)
+    "ms-vscode.vscode-typescript-tslint-plugin", // TypeScript support
+    "redhat.vscode-yaml", // YAML support
+    "vscode.json-language-features", // JSON support
+    "vscode.html-language-features", // HTML support
+    "vscode.markdown-language-features", // Markdown support
+    "vscode.csharp", // C# support (if applicable)
+    "esbenp.prettier-vscode" // Prettier for code formatting
+  ]
+}
