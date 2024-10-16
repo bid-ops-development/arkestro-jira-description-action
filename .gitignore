@@ -6,6 +6,7 @@
 *.temp
 *.tmp
 *.tsbuildinfo
+.yarn/
 coverage/
 dist/
 logs

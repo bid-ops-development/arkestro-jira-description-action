@@ -3,6 +3,7 @@
   "description": "This action adds the JIRA issue key to the PR description",
   "scripts": {
     "build": "yarn run lint && yarn run test && echo 'compiling' && tsc",
+    "build:bundle": "yarn run build ; esbuild src/index.ts --bundle --platform=node --outfile=dist/index.js",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
     "test": "node --trace-deprecation ./node_modules/jest/bin/jest.js  --config jest.config.ts --coverage",
@@ -20,6 +21,7 @@
     "@types/node": "^22.7.5",
     "@typescript-eslint/eslint-plugin": "^8.8.1",
     "@typescript-eslint/parser": "^8.8.1",
+    "esbuild": "^0.24.0",
     "eslint": "^9.12.0",
     "eslint-plugin-import": "^2.31.0",
     "identity-obj-proxy": "^3.0.0",
