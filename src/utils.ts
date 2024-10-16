@@ -73,22 +73,22 @@ ${HIDDEN_MARKER_END}
 
 export function buildPRDescription(details: JIRADetails): string {
   const labelString = details.labels.join(', ') // Join labels with a comma and space
-  let emoji = '';
+  let emoji = ''
   switch (details.type.name) {
     case 'Epic':
-      emoji = ':hurtrealbad:';
-      break;
+      emoji = ':hurtrealbad:'
+      break
     case 'Story':
-      emoji = ':suspect:';
-      break;
+      emoji = ':suspect:'
+      break
     case 'Task':
-      emoji = ':godmode:';
-      break;
+      emoji = ':godmode:'
+      break
     case 'Bug':
-      emoji = ':bug:';
-      break;
+      emoji = ':bug:'
+      break
     default:
-      emoji = ':shipit:';
+      emoji = ':shipit:'
   }
   return `<table width="100%">
     <thead>

@@ -34844,20 +34844,37 @@ ${HIDDEN_MARKER_END}
 }
 function buildPRDescription(details) {
   const labelString = details.labels.join(", ");
+  let emoji = "";
+  switch (details.type.name) {
+    case "Epic":
+      emoji = ":hurtrealbad:";
+      break;
+    case "Story":
+      emoji = ":suspect:";
+      break;
+    case "Task":
+      emoji = ":godmode:";
+      break;
+    case "Bug":
+      emoji = ":bug:";
+      break;
+    default:
+      emoji = ":shipit:";
+  }
   return `<table width="100%">
     <thead>
       <tr>
-        <th width="50%">Ticket Description</th>
+        <th width="50%">${emoji} Ticket Description ${emoji}</th>
         <th>Ticket Type</th>
         <th>Labels</th>
         <th>Priority</th>
       </tr>
     </thead>
     <tbody>
-      <tr>
-        <td width="50%"><a href="${details.url}" title="${details.key}" target="_blank"><img alt="${details.type.icon}" src="${details.type.icon}" /> ${details.key}</a> ${details.summary}</td>
+      <tr align="center">
+        <td align="left "width="50%"><a href="${details.url}" title="${details.key}" target="_blank"><img alt="${details.type.icon}" src="${details.type.icon}" /> ${details.key}</a> ${details.summary}</td>
         <td>${details.type.name}</td>
-        <td>${labelString}</td>
+        <td >${labelString}</td>
         <td>${details.priority || "Not Set"}</td>
       </tr>
     </tbody>
