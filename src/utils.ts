@@ -76,7 +76,7 @@ export function buildPRDescription(details: JIRADetails): string {
   let emoji = ''
   switch (details.type.name) {
     case 'Epic':
-      emoji = ':hurtrealbad:'
+      emoji = ':asdfasdf:'
       break
     case 'Story':
       emoji = ':suspect:'
