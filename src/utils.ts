@@ -74,10 +74,10 @@ ${HIDDEN_MARKER_END}
 export function buildPRDescription(details: JIRADetails): string {
   const labelString = details.labels.join(', ') // Join labels with a comma and space
 
-  return `<table>
+  return `<table width="100%">
     <thead>
       <tr>
-        <th>Ticket Description</th>
+        <th width="50%">Ticket Description</th>
         <th>Ticket Type</th>
         <th>Labels</th>
         <th>Priority</th>
@@ -85,7 +85,7 @@ export function buildPRDescription(details: JIRADetails): string {
     </thead>
     <tbody>
       <tr>
-        <td><a href="${details.url}" title="${details.key}" target="_blank"><img alt="${details.type.icon}" src="${details.type.icon}" /> ${details.key}</a> ${details.summary}</td>
+        <td width="50%"><a href="${details.url}" title="${details.key}" target="_blank"><img alt="${details.type.icon}" src="${details.type.icon}" /> ${details.key}</a> ${details.summary}</td>
         <td>${details.type.name}</td>
         <td>${labelString}</td>
         <td>${details.priority || 'Not Set'}</td>
