@@ -1,0 +1,5 @@
+pre-commit:
+  commands:
+    bundle:
+      run: yarn build:bundle && git diff --exit-code dist/index.js
+      stage_fixed: true
