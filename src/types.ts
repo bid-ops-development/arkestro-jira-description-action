@@ -90,6 +90,7 @@ export interface JIRADetails {
     key: string
   }
   labels: string[]
+  priority: IssuePriority
 }
 
 export interface IActionInputs {

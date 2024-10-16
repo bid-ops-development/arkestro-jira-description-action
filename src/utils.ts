@@ -80,6 +80,7 @@ export function buildPRDescription(details: JIRADetails): string {
         <th>Ticket Description</th>
         <th>Ticket Type</th>
         <th>Labels</th>
+        <th>Priority</th>
       </tr>
     </thead>
     <tbody>
@@ -87,6 +88,7 @@ export function buildPRDescription(details: JIRADetails): string {
         <td><a href="${details.url}" title="${details.key}" target="_blank"><img alt="${details.type.icon}" src="${details.type.icon}" /> ${details.key}</a> ${details.summary}</td>
         <td>${details.type.name}</td>
         <td>${labelString}</td>
+        <td>${details.priority.name}</td>
       </tr>
     </tbody>
   </table><br />
