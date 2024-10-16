@@ -6,7 +6,6 @@
 /.yarn/releases/* binary
 /.yarnrc.yml linguist-generated
 /action.yml linguist-generated
-/dist/** linguist-generated
 /LICENSE linguist-generated
 /package.json linguist-generated
 /tsconfig.json linguist-generated
